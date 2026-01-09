@@ -2,8 +2,10 @@
 
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { FolderOpen } from 'lucide-react';
+import { FolderOpen, Plus } from 'lucide-react';
 import { api } from '@/lib/api';
+import { useAuth } from '@/lib/auth';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface Category {
@@ -21,6 +23,9 @@ interface CategoriesResponse {
 }
 
 export default function CategoriesPage() {
+  const { user, isAuthenticated } = useAuth();
+  const canCreate = isAuthenticated && user && ['ADMIN', 'EDITOR'].includes(user.role);
+
   const { data, isLoading } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
@@ -31,11 +36,21 @@ export default function CategoriesPage() {
 
   return (
     <div className="container py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">Categories</h1>
-        <p className="text-muted-foreground">
-          Browse articles by category
-        </p>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Categories</h1>
+          <p className="text-muted-foreground">
+            Browse articles by category
+          </p>
+        </div>
+        {canCreate && (
+          <Link href="/categories/new">
+            <Button>
+              <Plus className="mr-2 h-4 w-4" />
+              New Category
+            </Button>
+          </Link>
+        )}
       </div>
 
       {isLoading ? (

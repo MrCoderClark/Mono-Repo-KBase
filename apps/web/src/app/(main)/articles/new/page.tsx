@@ -5,12 +5,18 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { ArrowLeft, Loader2 } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const TiptapEditor = dynamic(
+  () => import('@/components/editor/tiptap-editor').then((mod) => mod.TiptapEditor),
+  { ssr: false, loading: () => <div className="h-[300px] border rounded-md animate-pulse bg-muted" /> }
+);
 
 interface Category {
   id: string;
@@ -166,15 +172,11 @@ export default function NewArticlePage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="content">Content *</Label>
-              <textarea
-                id="content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+              <Label>Content *</Label>
+              <TiptapEditor
+                content={content}
+                onChange={setContent}
                 placeholder="Write your article content here..."
-                rows={12}
-                className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                required
               />
             </div>
 

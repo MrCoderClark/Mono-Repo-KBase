@@ -123,13 +123,13 @@ kbase/
 - [x] Article list & detail pages
 - [x] Article creation page
 - [x] Document list, detail & upload pages
-- [x] Categories page
+- [x] Categories page with create functionality
 - [x] Comments component
 - [x] Like/dislike component
 - [x] User settings page
-- [ ] Article editor with Tiptap (rich text)
-- [ ] Search interface
-- [ ] Admin panel (user management, roles)
+- [x] Article editor with Tiptap (rich text)
+- [x] Search interface
+- [x] Admin panel (user management, roles)
 
 ### Phase 6: Polish & Production ⬜
 - [ ] Error handling & loading states
