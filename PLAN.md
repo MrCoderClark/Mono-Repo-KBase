@@ -95,12 +95,13 @@ kbase/
 - [x] Configure ESLint, Prettier, TypeScript
 - [x] Set up Docker Compose for local services (PostgreSQL, Meilisearch, MinIO)
 
-### Phase 2: Backend Core ⬜
-- [ ] Initialize Express app with TypeScript
+### Phase 2: Backend Core ✅
+- [x] Initialize Express app with TypeScript
 - [x] Set up Prisma with PostgreSQL
 - [x] Create database schema
-- [ ] Implement Better Auth with RBAC
-- [ ] Create base API structure (routes, middleware, error handling)
+- [x] Implement custom auth with JWT, refresh tokens, RBAC
+- [x] Create base API structure (routes, middleware, error handling)
+- [x] Add password reset, email verification, session management
 
 ### Phase 3: Backend Features ⬜
 - [ ] Article CRUD API
@@ -223,7 +224,7 @@ GET    /api/admin/stats
 | Phase | Status | Started | Completed |
 |-------|--------|---------|-----------|
 | Phase 1: Foundation | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
-| Phase 2: Backend Core | 🔄 In Progress | Jan 9, 2026 | - |
+| Phase 2: Backend Core | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
 | Phase 3: Backend Features | ⬜ Not Started | - | - |
 | Phase 4: Frontend Foundation | ⬜ Not Started | - | - |
 | Phase 5: Frontend Features | ⬜ Not Started | - | - |
