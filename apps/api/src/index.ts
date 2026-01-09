@@ -4,6 +4,12 @@ import helmet from 'helmet';
 import { prisma } from '@kbase/database';
 import { errorHandler, notFoundHandler } from './middleware/error';
 import authRoutes from './routes/auth';
+import articleRoutes from './routes/articles';
+import commentRoutes from './routes/comments';
+import reactionRoutes from './routes/reactions';
+import documentRoutes from './routes/documents';
+import categoryRoutes from './routes/categories';
+import tagRoutes from './routes/tags';
 
 const app = express();
 const PORT = process.env.API_PORT || 3001;
@@ -25,6 +31,24 @@ app.get('/api', (_req, res) => {
 
 // Auth routes
 app.use('/api/auth', authRoutes);
+
+// Article routes
+app.use('/api/articles', articleRoutes);
+
+// Comment routes
+app.use('/api/comments', commentRoutes);
+
+// Reaction routes
+app.use('/api/reactions', reactionRoutes);
+
+// Document routes
+app.use('/api/documents', documentRoutes);
+
+// Category routes
+app.use('/api/categories', categoryRoutes);
+
+// Tag routes
+app.use('/api/tags', tagRoutes);
 
 // Error handling
 app.use(notFoundHandler);

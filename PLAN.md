@@ -103,13 +103,13 @@ kbase/
 - [x] Create base API structure (routes, middleware, error handling)
 - [x] Add password reset, email verification, session management
 
-### Phase 3: Backend Features ⬜
-- [ ] Article CRUD API
-- [ ] Document upload & processing API
-- [ ] Comments API
-- [ ] Reactions (like/dislike) API
-- [ ] Search API with Meilisearch
-- [ ] File storage integration (S3/MinIO)
+### Phase 3: Backend Features ✅
+- [x] Article CRUD API
+- [x] Document upload & processing API
+- [x] Comments API
+- [x] Reactions (like/dislike) API
+- [x] Categories & Tags API
+- [x] File storage integration (S3/MinIO)
 
 ### Phase 4: Frontend Foundation ⬜
 - [ ] Initialize Next.js 15 with App Router
@@ -225,7 +225,7 @@ GET    /api/admin/stats
 |-------|--------|---------|-----------|
 | Phase 1: Foundation | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
 | Phase 2: Backend Core | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
-| Phase 3: Backend Features | ⬜ Not Started | - | - |
+| Phase 3: Backend Features | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
 | Phase 4: Frontend Foundation | ⬜ Not Started | - | - |
 | Phase 5: Frontend Features | ⬜ Not Started | - | - |
 | Phase 6: Polish & Production | ⬜ Not Started | - | - |
