@@ -1,0 +1,237 @@
+# Knowledge Base Web App - Project Plan
+
+## Overview
+A production-grade pnpm monorepo Knowledge Base application for IT professionals with article management, document uploads, search, social features (likes/dislikes, comments), and RBAC authentication.
+
+---
+
+## Tech Stack
+
+### Backend
+| Component | Technology |
+|-----------|------------|
+| Runtime | Node.js 20+ with TypeScript |
+| Framework | Express |
+| Database | PostgreSQL |
+| ORM | Prisma |
+| Authentication | Better Auth (production-grade with RBAC) |
+| File Storage | S3-compatible (MinIO for dev, AWS S3 for prod) |
+| Search | Meilisearch |
+| Document Processing | pdf-parse, mammoth (Word docs) |
+| Validation | Zod |
+
+### Frontend
+| Component | Technology |
+|-----------|------------|
+| Framework | Next.js 15 (App Router) |
+| Styling | TailwindCSS v4 |
+| UI Components | shadcn/ui |
+| State/Data Fetching | TanStack Query v5 |
+| Forms | React Hook Form + Zod |
+| Icons | Lucide React |
+| Rich Text Editor | Tiptap |
+
+### DevOps & Tooling
+| Component | Technology |
+|-----------|------------|
+| Monorepo | pnpm workspaces + Turborepo |
+| Linting | ESLint + Prettier |
+| Testing | Vitest + Playwright |
+| Containerization | Docker + Docker Compose |
+
+---
+
+## Monorepo Structure
+
+```
+kbase/
+├── apps/
+│   ├── web/                    # Next.js frontend
+│   └── api/                    # Express backend
+├── packages/
+│   ├── database/               # Prisma schema & client
+│   ├── types/                  # Shared TypeScript types
+│   ├── utils/                  # Shared utilities
+│   ├── config/                 # Shared configuration
+│   └── ui/                     # Shared UI components (optional)
+├── docker/
+│   └── docker-compose.yml      # Local dev services
+├── pnpm-workspace.yaml
+├── turbo.json
+├── package.json
+└── .env.example
+```
+
+---
+
+## Database Schema (High-Level)
+
+### Core Tables
+- **users** - User accounts with roles
+- **roles** - RBAC roles (admin, editor, viewer)
+- **permissions** - Granular permissions
+- **sessions** - Auth sessions
+
+### Content Tables
+- **articles** - Knowledge base articles (rich text)
+- **documents** - Uploaded files (Word, PDF)
+- **categories** - Content categorization
+- **tags** - Content tagging
+
+### Social Tables
+- **comments** - Comments on articles/documents
+- **reactions** - Likes/dislikes on content
+
+### Search
+- **search_index** - Full-text search index (Meilisearch)
+
+---
+
+## Implementation Phases
+
+### Phase 1: Foundation ⬜
+- [ ] Initialize pnpm monorepo with Turborepo
+- [ ] Set up shared packages (types, utils, config)
+- [ ] Configure ESLint, Prettier, TypeScript
+- [ ] Set up Docker Compose for local services (PostgreSQL, Meilisearch, MinIO)
+
+### Phase 2: Backend Core ⬜
+- [ ] Initialize Fastify app with TypeScript
+- [ ] Set up Prisma with PostgreSQL
+- [ ] Create database schema
+- [ ] Implement Better Auth with RBAC
+- [ ] Create base API structure (routes, middleware, error handling)
+
+### Phase 3: Backend Features ⬜
+- [ ] Article CRUD API
+- [ ] Document upload & processing API
+- [ ] Comments API
+- [ ] Reactions (like/dislike) API
+- [ ] Search API with Meilisearch
+- [ ] File storage integration (S3/MinIO)
+
+### Phase 4: Frontend Foundation ⬜
+- [ ] Initialize Next.js 15 with App Router
+- [ ] Set up TailwindCSS v4 + shadcn/ui
+- [ ] Configure TanStack Query
+- [ ] Create layout and navigation
+- [ ] Implement authentication pages (login, register, forgot password)
+
+### Phase 5: Frontend Features ⬜
+- [ ] Dashboard page
+- [ ] Article list & detail pages
+- [ ] Article editor with Tiptap
+- [ ] Document upload & viewer
+- [ ] Search interface
+- [ ] Comments component
+- [ ] Like/dislike component
+- [ ] User profile & settings
+- [ ] Admin panel (user management, roles)
+
+### Phase 6: Polish & Production ⬜
+- [ ] Error handling & loading states
+- [ ] Responsive design
+- [ ] Accessibility audit
+- [ ] Performance optimization
+- [ ] Unit & integration tests
+- [ ] E2E tests with Playwright
+- [ ] Production deployment configuration
+
+---
+
+## API Endpoints (Planned)
+
+### Auth
+```
+POST   /api/auth/register
+POST   /api/auth/login
+POST   /api/auth/logout
+POST   /api/auth/refresh
+POST   /api/auth/forgot-password
+POST   /api/auth/reset-password
+GET    /api/auth/me
+```
+
+### Articles
+```
+GET    /api/articles              # List (with pagination, filters)
+GET    /api/articles/:id          # Get single
+POST   /api/articles              # Create (editor+)
+PUT    /api/articles/:id          # Update (editor+)
+DELETE /api/articles/:id          # Delete (admin)
+```
+
+### Documents
+```
+GET    /api/documents             # List
+GET    /api/documents/:id         # Get single
+POST   /api/documents/upload      # Upload (editor+)
+DELETE /api/documents/:id         # Delete (admin)
+GET    /api/documents/:id/download
+```
+
+### Comments
+```
+GET    /api/comments?contentType=&contentId=
+POST   /api/comments
+PUT    /api/comments/:id
+DELETE /api/comments/:id
+```
+
+### Reactions
+```
+POST   /api/reactions             # Add like/dislike
+DELETE /api/reactions/:id         # Remove reaction
+GET    /api/reactions/count?contentType=&contentId=
+```
+
+### Search
+```
+GET    /api/search?q=&type=&category=
+```
+
+### Admin
+```
+GET    /api/admin/users
+PUT    /api/admin/users/:id/role
+DELETE /api/admin/users/:id
+GET    /api/admin/stats
+```
+
+---
+
+## RBAC Roles & Permissions
+
+| Permission | Viewer | Editor | Admin |
+|------------|--------|--------|-------|
+| View articles | ✅ | ✅ | ✅ |
+| View documents | ✅ | ✅ | ✅ |
+| Add comments | ✅ | ✅ | ✅ |
+| Like/dislike | ✅ | ✅ | ✅ |
+| Create articles | ❌ | ✅ | ✅ |
+| Edit own articles | ❌ | ✅ | ✅ |
+| Edit any article | ❌ | ❌ | ✅ |
+| Upload documents | ❌ | ✅ | ✅ |
+| Delete content | ❌ | ❌ | ✅ |
+| Manage users | ❌ | ❌ | ✅ |
+| Manage roles | ❌ | ❌ | ✅ |
+
+---
+
+## Progress Tracking
+
+| Phase | Status | Started | Completed |
+|-------|--------|---------|-----------|
+| Phase 1: Foundation | ⬜ Not Started | - | - |
+| Phase 2: Backend Core | ⬜ Not Started | - | - |
+| Phase 3: Backend Features | ⬜ Not Started | - | - |
+| Phase 4: Frontend Foundation | ⬜ Not Started | - | - |
+| Phase 5: Frontend Features | ⬜ Not Started | - | - |
+| Phase 6: Polish & Production | ⬜ Not Started | - | - |
+
+---
+
+## Notes
+- All dates in UTC
+- Update this file as progress is made
+- Check off items as completed using [x]
