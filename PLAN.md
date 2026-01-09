@@ -111,22 +111,24 @@ kbase/
 - [x] Categories & Tags API
 - [x] File storage integration (S3/MinIO)
 
-### Phase 4: Frontend Foundation ⬜
-- [ ] Initialize Next.js 15 with App Router
-- [ ] Set up TailwindCSS v4 + shadcn/ui
-- [ ] Configure TanStack Query
-- [ ] Create layout and navigation
-- [ ] Implement authentication pages (login, register, forgot password)
+### Phase 4: Frontend Foundation ✅
+- [x] Initialize Next.js 15 with App Router
+- [x] Set up TailwindCSS + shadcn/ui
+- [x] Configure TanStack Query
+- [x] Create layout and navigation
+- [x] Implement authentication pages (login, register, forgot password)
 
-### Phase 5: Frontend Features ⬜
-- [ ] Dashboard page
-- [ ] Article list & detail pages
-- [ ] Article editor with Tiptap
-- [ ] Document upload & viewer
+### Phase 5: Frontend Features ✅
+- [x] Dashboard page
+- [x] Article list & detail pages
+- [x] Article creation page
+- [x] Document list, detail & upload pages
+- [x] Categories page
+- [x] Comments component
+- [x] Like/dislike component
+- [x] User settings page
+- [ ] Article editor with Tiptap (rich text)
 - [ ] Search interface
-- [ ] Comments component
-- [ ] Like/dislike component
-- [ ] User profile & settings
 - [ ] Admin panel (user management, roles)
 
 ### Phase 6: Polish & Production ⬜
@@ -226,8 +228,8 @@ GET    /api/admin/stats
 | Phase 1: Foundation | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
 | Phase 2: Backend Core | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
 | Phase 3: Backend Features | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
-| Phase 4: Frontend Foundation | ⬜ Not Started | - | - |
-| Phase 5: Frontend Features | ⬜ Not Started | - | - |
+| Phase 4: Frontend Foundation | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
+| Phase 5: Frontend Features | ✅ Complete | Jan 9, 2026 | Jan 9, 2026 |
 | Phase 6: Polish & Production | ⬜ Not Started | - | - |
 
 ---
