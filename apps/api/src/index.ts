@@ -10,6 +10,7 @@ import reactionRoutes from './routes/reactions';
 import documentRoutes from './routes/documents';
 import categoryRoutes from './routes/categories';
 import tagRoutes from './routes/tags';
+import adminRoutes from './routes/admin';
 
 const app = express();
 const PORT = process.env.API_PORT || 3001;
@@ -49,6 +50,9 @@ app.use('/api/categories', categoryRoutes);
 
 // Tag routes
 app.use('/api/tags', tagRoutes);
+
+// Admin routes
+app.use('/api/admin', adminRoutes);
 
 // Error handling
 app.use(notFoundHandler);
